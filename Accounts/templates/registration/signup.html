@@ -1,0 +1,90 @@
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+
+</head>
+
+<style>
+  input::placeholder, textarea::placeholder {
+    font-family: 'Cairo', sans-serif;
+    color: #aaa; /* لتغيير لون الـ placeholder إذا لزم الأمر */
+  }
+  select {
+    font-family: 'Cairo', sans-serif;
+  }
+  form {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  h2 {
+    color: #00d363;
+    text-align: center;
+  }
+
+  input[type="text"], input[type="password"], input[type="email"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #00d363;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #00D245;
+  }
+
+  .custom-file-upload {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+      cursor: pointer;
+  }
+  .custom-file-upload label {
+      background-color: #0c6298;
+      color: white;
+      padding: 10px;
+      border-radius: 4px;
+      display: inline-block;
+  }
+  input[type="file"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      cursor: pointer;
+  }
+
+    
+</style>
+
+
+<form method="post" dir="rtl" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <h2>Create a new account</h2>
+  {{ form.as_p }}
+
+  <button type="submit">sign up</button>
+  <a href="{% url 'login' %}">login</a>
+</form>
+
+
+  
+  
