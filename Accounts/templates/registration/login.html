@@ -1,128 +1,30 @@
+{% extends "base_generic.html" %}
 {% load bootstrap4 %}
-<head>
+{% block content %}
 
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
-  <meta charset="UTF-8">
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
 
-  <!-- Vendor CSS Files -->
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" value="login" class="boxed-btn3 w-100" >
+    <input type="hidden" name="next" value="{{ next }}">
+  </form>
 
-</header>
-  <style>
-    .body {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-size: cover;
-      background-position: center;
-      flex-direction: column;
-      font-family: 'Cairo', sans-serif;
-    } 
-    .form-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-    }
-    form {
-      width: 90%;
-      max-width: 500px; /* تحديد العرض الأقصى للنموذج */
-      background: #ffffff6e;
-      padding: 20px;
-      border-radius: 4px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* إضافة ظل للنموذج */
-    }
-    
-    form h1 {
-      text-align: center;
-      color: #00D363; /* تغيير لون العنوان */
-    }
-    
-    form input[type='text'],
-    form input[type='password'],
-    form input[type='submit'] {
-      width: 100%; /* استخدام العرض الكامل */
-      padding: 10px;
-      margin: 8px 0; /* توفير مساحة بين الحقول */
-      display: inline-block;
-      border: 1px solid #ccc;
-      box-sizing: border-box; /* تأكد من أن الحدود والpadding جزء من العرض الإجمالي */
-      border-radius: 4px;
-      font-family: 'Cairo', sans-serif; /* تقريب حواف الحقول */
-    }
-    
-    form input[type='submit'] {
-      background-color: #00D363; /* استخدام لون زر موحد */
-      color: white;
-      cursor: pointer; /* تغيير مؤشر الماوس إلى يد عند تمريره فوق الزر */
-    }
-    
-    form input[type='submit']:hover {
-      background-color: #00D245; /* تغميق لون الزر عند تمرير الماوس */
-    }
-    
-    .login-buttons {
-      display: flex;
-      justify-content: space-between;
-      padding-top: 20px; /* توفير مسافة بين النموذج والأزرار */
-    }
-    
-    .login-buttons a {
-      color: #00D363;
-      text-decoration: none;
-    }
-    
-    .login-buttons a:hover {
-      text-decoration: underline;
-    }
-    label {
-      display: none;
-    }
-    #id_username {
-    }
-  </style>
-
-{% block body %}
+  {# Assumes you setup the password_reset view in your URLconf #}
+  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+  <p><a href="{% url 'accounts:signup' %}" class="boxed-btn3 w-20">Sign up</a></p>
   
-  
-  <div class="body">
-    <div class="form-container">
-      {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
-      {% endif %}
 
-
-      <form method="post" dir="rtl" action="{% url 'accounts:custom_login_view' %}">
-        <h1>Login</h1>
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input type="submit" value="Login" class="boxed-btn3 w-100" />
-        <input type="hidden" name="next" value="{{ next }}" />
-      </form>
-    </div>
-
-    <div class="login-buttons">
-     
-      
-      <p>
-          <a href="{% url 'accounts:signup' %}" class="boxed-btn3 w-20">Create a new account</a>
-      </p>
-    
-      
- 
-      
-
-      
-    
-      {% comment %} <p>
-        <a href="https://wa.me/9647717785233">  ,نسيت كلمة المرور؟تواصل مع المشرفين</a>
-      </p> {% endcomment %}
-    </div>
-  </div>
-
-  {% endblock body %}
-
-
- 
+{% endblock %}

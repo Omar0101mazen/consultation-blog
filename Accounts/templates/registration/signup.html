@@ -22,7 +22,7 @@
   }
 
   h2 {
-    color: #00d363;
+    color: #0c6298;
     text-align: center;
   }
 
@@ -38,7 +38,7 @@
   button[type="submit"] {
     width: 100%;
     padding: 10px;
-    background-color: #00d363;
+    background-color: #0c6298;
     color: white;
     border: none;
     border-radius: 4px;
@@ -47,22 +47,24 @@
   }
 
   button[type="submit"]:hover {
-    background-color: #00D245;
+    background-color: #134869;
   }
 
-  .custom-file-upload {
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 20px;
-      cursor: pointer;
-  }
+  
   .custom-file-upload label {
-      background-color: #0c6298;
-      color: white;
-      padding: 10px;
-      border-radius: 4px;
-      display: inline-block;
+    background-color: #0c6298;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
+
+  .custom-file-upload label:hover {
+      background-color: #134869;
+  }
+
   input[type="file"] {
       position: absolute;
       left: 0;
@@ -70,10 +72,13 @@
       opacity: 0;
       cursor: pointer;
   }
+ 
+  
 
     
 </style>
-
+<body>
+  
 
 <form method="post" dir="rtl" enctype="multipart/form-data">
   {% csrf_token %}
@@ -84,7 +89,26 @@
   <button type="submit">sign up</button>
   <a href="{% url 'login' %}">login</a>
 </form>
+<script>
+  function toggleFields() {
+      var accountType = document.getElementById('id_account_type').value;
 
+      if (accountType === 'advisor') {
+          document.getElementById('id_experiences').style.display = 'block';
+          document.getElementById('id_certificates').style.display = 'block';
+      } else {
+          document.getElementById('id_experiences').style.display = 'none';
+          document.getElementById('id_certificates').style.display = 'none';
+      }
+  }
 
+  // تعيين التصرف عند تغيير نوع الحساب
+  document.getElementById('id_account_type').addEventListener('change', toggleFields);
+
+  // تحقق من نوع الحساب عند تحميل الصفحة لعرض/إخفاء الحقول بناءً على القيمة الافتراضية
+  window.addEventListener('load', toggleFields);
+</script>
+
+</body>
   
   
