@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
-                        <h3>{{jobs|length}} + Jobs Available</h3>
+                        <h3>{{posts|length}} + Post Available</h3>
                     </div>
                 </div>
             </div>
@@ -40,40 +40,41 @@
 
                     <div class="job_lists m-0">
                         <div class="row">
-                            {% for job in jobs %}
+                            {% for post in posts %}
                               
                             
                             <div class="col-lg-12 col-md-12">
                                 <div class="single_jobs white-bg d-flex justify-content-between">
                                     <div class="jobs_left d-flex align-items-center">
                                         <div class="thumb">
-                                            {% if job.img %}
-                                                <img src="{{job.img.url}}" alt="Job" width="82" height="82">
+                                            {% if post.photo %}
+                                                <img src="{{post.pjoto.url}}" alt="Job" width="82" height="82">
                                             {% else %} 
                                                 <img src="{% static 'img/job.png' %}" alt="Job" width="82" height="82">    
                                             {% endif %}
                                                
                                         </div>
                                         <div class="jobs_conetent">
-                                            <a href="{% url 'jobs:job_detail' job.slug %}"><h4>{{job.title}}</h4></a>
+                                            <a href="#"><h4>{{post.title}}</h4></a>
                                             <div class="links_locat d-flex align-items-center">
                                                 <div class="location">
-                                                    <p> <i class="fa fa-map-marker"></i>{{job.Country}}</p>
+                                                    <p> <i class="fa fa-map-marker"></i>{{post.content}}</p>
                                                 </div>
-                                                <div class="location">
+                                                {% comment %} <div class="location">
                                                     <p> <i class="fa fa-clock-o"></i>{{job.job_type}}</p>
-                                                </div>
+                                                    {% url 'jobs:job_detail' job.slug %}
+                                                </div> {% endcomment %}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="jobs_right">
                                         <div class="apply_now">
                                             <!-- <a class="heart_mark" href="#"> <i class="fa fa-heart"></i> </a> -->
-                                            <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">Apply Now</a>
+                                            {% comment %} <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">Apply Now</a> {% endcomment %}
                                         </div>
-                                        <div class="date">
-                                            <p>Date line: {{job.published_at|date:'d M o'}}</p>
-                                        </div>
+                                        {% comment %} <div class="date">
+                                            <p>Date line: {{post.published_at|date:'d M o'}}</p>
+                                        </div> {% endcomment %}
                                     </div>
                                 </div>
                             </div>
