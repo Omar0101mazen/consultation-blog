@@ -1,15 +1,15 @@
+
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
-
 </head>
 
 <style>
   input::placeholder, textarea::placeholder {
     font-family: 'Cairo', sans-serif;
-    color: #aaa; /* لتغيير لون الـ placeholder إذا لزم الأمر */
+    color: #aaa;
   }
-  select {
+  select, label {
     font-family: 'Cairo', sans-serif;
   }
   form {
@@ -18,24 +18,19 @@
     padding: 20px;
     background: #f7f7f7;
     border-radius: 8px;
-    font-family: 'Cairo', sans-serif;
   }
-
   h2 {
     color: #0c6298;
     text-align: center;
   }
-
-  input[type="text"], input[type="password"], input[type="email"] {
+  input[type="text"], input[type="password"], input[type="email"], select, textarea {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    
   }
-
-  button[type="submit"] {
+  button[type="submit"], .custom-file-upload label {
     width: 100%;
     padding: 10px;
     background-color: #0c6298;
@@ -43,72 +38,72 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-family: 'Cairo', sans-serif;
   }
-
-  button[type="submit"]:hover {
+  button[type="submit"]:hover, .custom-file-upload label:hover {
     background-color: #134869;
   }
-
-  
+  .custom-file-upload {
+    position: relative;
+    margin-bottom: 20px;
+    display: inline-block;
+  }
   .custom-file-upload label {
+    display: inline-block;
+    padding: 10px;
     background-color: #0c6298;
     color: white;
-    padding: 10px;
-    border-radius: 4px;
-    display: inline-block;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-
-  .custom-file-upload label:hover {
-      background-color: #134869;
-  }
-
   input[type="file"] {
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0;
-      cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
   }
- 
-  
-
-    
 </style>
+
 <body>
   
+  <form method="post" dir="rtl" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2>إنشاء حساب جديد</h2>
+    {{ form.as_p }}
 
-<form method="post" dir="rtl" enctype="multipart/form-data">
-  {% csrf_token %}
+    <!-- Extra fields for profile -->
+    <label for="id_account_type">نوع الحساب</label>
+    <select id="id_account_type" name="account_type">
+      <option value="normal">طبيعي</option>
+      <option value="advisor">مستشار</option>
+    </select>
 
-  <h2>Create a new account</h2>
-  {{ form.as_p }}
 
-  <button type="submit">sign up</button>
-  <a href="{% url 'login' %}">login</a>
-</form>
+
+    <label id="label_experiences" for="id_experiences">خبراتك</label>
+    <textarea id="id_experiences" name="experiences"></textarea>
+
+    <label id="label_certificates" for="id_certificates">شهاداتك</label>
+    <textarea id="id_certificates" name="certificates"></textarea>
+    <div class="custom-file-upload">
+      <label for="id_photo">حمل الصورة الشخصية</label>
+      <input type="file" id="id_photo" name="photo">
+    </div>
+
+    <button type="submit">إنشاء حساب</button>
+    <a href="{% url 'login' %}">العودة لتسجيل الدخول</a>
+  </form>
+
 <script>
   function toggleFields() {
-      var accountType = document.getElementById('id_account_type').value;
-
-      if (accountType === 'advisor') {
-          document.getElementById('id_experiences').style.display = 'block';
-          document.getElementById('id_certificates').style.display = 'block';
-      } else {
-          document.getElementById('id_experiences').style.display = 'none';
-          document.getElementById('id_certificates').style.display = 'none';
-      }
+    var accountType = document.getElementById('id_account_type').value;
+    var show = (accountType === 'advisor');
+    document.getElementById('id_experiences').style.display = show ? 'block' : 'none';
+    document.getElementById('id_certificates').style.display = show ? 'block' : 'none';
+    document.getElementById('label_experiences').style.display = show ? 'block' : 'none';
+    document.getElementById('label_certificates').style.display = show ? 'block' : 'none';
   }
-
-  // تعيين التصرف عند تغيير نوع الحساب
   document.getElementById('id_account_type').addEventListener('change', toggleFields);
-
-  // تحقق من نوع الحساب عند تحميل الصفحة لعرض/إخفاء الحقول بناءً على القيمة الافتراضية
   window.addEventListener('load', toggleFields);
 </script>
-
 </body>
-  
-  

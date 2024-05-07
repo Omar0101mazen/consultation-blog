@@ -1,32 +1,33 @@
 from django.shortcuts import render, redirect
-from .forms import SignUpForm, LoginForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, authenticate
+from .forms import SignUpForm
+from .models import Profile
 
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST, request.FILES)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             raw_password = form.cleaned_data.get('password1')
             user.set_password(raw_password)
             user.save()
-
-            # التحقق من وجود ملف التعريف قبل الحفظ
+            
+            # Create or update user profile with additional data from the HTML form
+            profile, created = Profile.objects.get_or_create(user=user)
+            profile.account_type = request.POST.get('account_type', 'normal')
             if 'photo' in request.FILES:
-                form.save()
-
-            # تحقق من وجود ملف التعريف قبل الحفظ
-            if hasattr(user, 'profile'):
-                profile = user.profile
-                profile.account_type = form.cleaned_data.get('account_type')
-                profile.experiences = form.cleaned_data.get('experiences')
-                profile.certificates = form.cleaned_data.get('certificates')
-                profile.save()
+                profile.photo = request.FILES['photo']
+            profile.experiences = request.POST.get('experiences', '')
+            profile.certificates = request.POST.get('certificates', '')
+            profile.save()
 
             user = authenticate(username=user.username, password=raw_password)
-            if user is not None:
+            if user:
                 login(request, user)
-                return redirect_to_user_dashboard(user)  # توجيه المستخدم إلى لوحة التحكم
+                return redirect('dashboard_url')  # Replace 'dashboard_url' with the actual URL name for redirecting
+        else:
+            # If the form is not valid, you might want to handle it differently
+            pass
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
