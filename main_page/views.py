@@ -23,7 +23,7 @@ def post_list(request):
 
 # @login_required
 # def post_detail(request,slug):
-#     post_detail = post.objects.get(slug=slug)
+#     post_detail = Post.objects.get(slug=slug)
 #     if request.method == 'POST':
 #         form = post_form(request.POST,request.FILES)
 #         if form.is_valid:
@@ -33,9 +33,9 @@ def post_list(request):
            
             
             
-    # else :
-    #     form = post_form()
+#     else :
+#         form = post_form()
         
-    # context = {'post':post_detail,'form':form}
-    # return render(request,'post/post_detail.html',context)
+#     context = {'post':post_detail,'form':form}
+#     return render(request,'post_detail.html',context)
 

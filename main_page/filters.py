@@ -5,5 +5,4 @@ class PostFilter(django_filters.FilterSet):
     class Meta:
         model = Post
         fields = ['title']
-        # exclude =  ('slug','owner','img','published_at','salary','Vacancy')
         

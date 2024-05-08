@@ -51,3 +51,9 @@ class LoginForm(forms.Form):
         label=''
     )
 
+
+
+# class ProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         fields = ['photo','appointment1','appointment2','appointment3','appointment4','appointment5'] 

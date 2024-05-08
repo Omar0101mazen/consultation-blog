@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from .forms import SignUpForm
+from django.contrib.auth import login, authenticate,logout
+from .forms import SignUpForm,LoginForm
 from .models import Profile
 
 def signup(request):
@@ -47,11 +47,32 @@ def custom_login_view(request):
     return render(request, 'registration/login.html', {'form': form})
 
 def redirect_to_user_dashboard(user):
-    if user.profile.account_type == 'advisor':
-        return redirect('dashboard_m:create_moral')  # URL لوحة تحكم المستشارين
-    else:
-        return redirect('dashboard_n:create_normal')  # URL لوحة تحكم المستخدمين العاديين
+    # if user.profile.account_type == 'advisor':
+    #     return redirect('dashboard_m:create_moral')  # URL لوحة تحكم المستشارين
+    # else:
+    return redirect('mainpage:list')  # URL لوحة تحكم المستخدمين العاديين
 
 def custom_logout_view(request):
     logout(request)
     return redirect('/')  # توجيه المستخدم إلى الصفحة الرئيسية بعد تسجيل الخروج
+
+
+# # def projile_edit(request):
+#     profiles = Profile.objects.get(user = request.user)
+    
+#     if request.method == 'POST':
+#         userform = UserForm(request.POST,instance=request.user)
+#         profileform = ProfileForm(request.POST,request.FILES,instance=profiles)
+#         if userform.is_valid() and profileform.is_valid() :
+#             userform.save()
+#             myprofile = profileform.save(commit=False)
+#             myprofile.user = request.user
+#             myprofile.save()
+#             return redirect(reverse('accounts:profile'))
+    
+#     else:
+#         userform = UserForm(instance=request.user)
+#         profileform = ProfileForm(instance=profiles)
+        
+    
+#     return render(request,'accounts/profile_edit.html',{'userform':userform,'profileform':profileform})

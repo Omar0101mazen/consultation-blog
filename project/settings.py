@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'bootstrap4',
+    'Accounts', 
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Accounts',
     'dash_board',
     'main_page',
+    'Advisor',
 ]
 
 MIDDLEWARE = [

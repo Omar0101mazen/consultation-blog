@@ -41,7 +41,7 @@ class Post(models.Model):
     
     
     def save(self,*args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(self.pk)
         super(Post,self).save(*args, **kwargs)
         
         

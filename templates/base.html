@@ -56,7 +56,7 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="#">الرأيسية</a></li>
+                                            <li><a href="{% url 'mainpage:list' %}">الرأيسية</a></li>
                                             <li><a href="#">المستشارين</a></li>
                                             <li><a href="#">عن معين</a></li>
                                             
@@ -68,16 +68,16 @@
                                 <div class="Appointment">
                                     {% if request.user.is_authenticated %}
                                         <div class="phone_num d-none d-xl-block">
-                                            <a href="{% url 'logout' %}">log out</a>
+                                            <a href="{% url 'logout' %}">تسجيل الخروج</a>
                                         </div>
 
-                                        {% comment %} <div class="phone_num d-none d-xl-block">
-                                            <a class="boxed-btn3" href="{% url 'accounts:profile' %}">Profile</a>
-                                        </div> {% endcomment %}
+                                        <div class="phone_num d-none d-xl-block">
+                                            <a class="boxed-btn3" href="{% url 'dashboard:creat_post' %}">لوحة التحكم</a>
+                                        </div> 
                                  
                                     {% else %}
                                         <div class="phone_num d-none d-xl-block">
-                                            <a class = "boxed-btn3" href="{% url 'login' %}">Log in</a>
+                                            <a class = "boxed-btn3" href="{% url 'login' %}">تسجيل الدخول</a>
                                         </div>
                                     {% endif %}
 

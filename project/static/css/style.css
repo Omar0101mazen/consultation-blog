@@ -7500,3 +7500,49 @@ h6 {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+/* profile_card */
+.profile-card{
+  margin: 20px 0;
+  padding: 20px 0 10px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+.profile-card img{
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+.profile-card .profile-name{
+  margin: 15px 0;
+  text-align: center;
+  font-size: 1.8rem;
+}
+.profile-card .profile-buttons-area{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.profile-card .profile-buttons-area a{
+  text-align: center;
+  text-decoration: none;
+  width: 40%;
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  transition: .5s;
+}
+.profile-card .profile-buttons-area a:hover{
+  transform: scale(1.05);
+}
+.profile-card .products-details {
+  text-align: center;
+  font-size: 1.4rem;
+}
+.profile-card .products-details h5 {
+  font-size: 1.8rem;
+  color: var(--main-color);
+}

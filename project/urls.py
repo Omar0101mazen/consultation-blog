@@ -23,7 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('Accounts.urls',namespace='accounts')),
-    path('', include('main_page.urls')),
+    path('', include('main_page.urls',namespace='mainpage')),
+    path('dashboard/', include('dash_board.urls',namespace='dashboard')),
+    path('advisor/', include('Advisor.urls',namespace='advisor')),
+    
+    
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.ALLOWED_HOSTS:
