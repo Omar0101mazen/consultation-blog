@@ -6,6 +6,8 @@ from .forms import post_form
 from django.contrib.auth.decorators import login_required
 from .filters import PostFilter
 from django.db.models import Count
+from .forms import CommentForm
+from django.shortcuts import get_object_or_404, redirect
 # Create your views here.
 
 
@@ -21,23 +23,29 @@ def post_list(request):
     context = {'posts':page_obj, 'myfilter' : myfilter}
     return render(request,'posts.html',context)
 
+
+
 @login_required
-def post_detail(request,slug):
-    post_detail = Post.objects.get(slug=slug)
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)
     if request.method == 'POST':
-        form = post_form(request.POST,request.FILES)
-        if form.is_valid:
-            my_form = form.save(commit=False)
-            my_form.titl = post_detail
-            my_form.save()
-           
-            
-            
-    else :
-        form = post_form()
-        
-    context = {'post':post_detail,'form':form}
-    return render(request,'post_detail.html',context)
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            # Check if the user is an advisor before saving
+            if request.user.profile.account_type == 'advisor':
+                comment.save()
+                return redirect('post_detail', slug=post.slug)
+            else:
+                # Handle cases where the user is not allowed to comment
+                return HttpResponseForbidden("You are not authorized to comment.")
+    else:
+        comment_form = CommentForm()
+    
+    return render(request, 'post_detail.html', {'post': post, 'comment_form': comment_form})
+
 
 
 

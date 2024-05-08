@@ -5,117 +5,63 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-12">
-                <div class="bradcam_text">
-                    <h3>Welcome</h3>
-                </div>
+                
             </div>
         </div>
     </div>
 </div>
+<!--/ bradcam_area  -->
 
-<!-- <div class="catagory_area">
-        <div class="container">
-            <div class="row cat_search">
-                <div class="col-lg-3 col-md-4">
-                    <div class="single_input">
-                        <select class="wide">
-                            <option data-display="Category">Category</option>
-                            <option value="1">Category 1</option>
-                            <option value="2">Category 2</option>
-                            <option value="4">Category 3</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-12">
-                    <div class="job_btn">
-                        <a href="#" class="boxed-btn3">Find Job</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="popular_search d-flex align-items-center">
-                        <span>Popular Search:</span>
-                        <ul>
-                            <li><a href="#">Design & Creative</a></li>
-                            <li><a href="#">Marketing</a></li>
-                            <li><a href="#">Administration</a></li>
-                            <li><a href="#">Teaching & Education</a></li>
-                            <li><a href="#">Engineering</a></li>
-                            <li><a href="#">Software & Web</a></li>
-                            <li><a href="#">Telemarketing</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-<!--/ catagory_area -->
 
-<!-- popular_catagory_area_start  -->
-<div class="popular_catagory_area">
+<!--================Blog Area =================-->
+<section class="blog_area section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="section_title mb-40">
-                    <h3>Popolar Categories</h3>
+            <div class="col-lg-8 mb-5 mb-lg-0" dir="rtl" style="margin-left:15%;">
+                <div class="blog_left_sidebar">
+                    <article class="blog_item">
+                        <div class="blog_item_img">
+                            <img src="{% static 'img/mooen.png' %}" width="100" height="95" alt="">
+                          
+                        </div>
+
+                        <div class="blog_details">
+                            <a class="d-inline-block" href="single-blog.html">
+                                <h2>عن مُعين؟</h2>
+                            </a>
+                            <p>
+                                مُعين هُنا لعينك في رحلتك الأكاديمية، يبصّرك بأهدافك، ويعينك على تحقيقها.
+                                من خلال استشارات توجهك نحو النجاح الأكاديمي والمستقبل المهني المشرق.
+                                </p>
+                                <p>
+                               <h4>لماذا مُعين؟</h4>
+                                <p>
+                                مستشارون متميزون:
+                                يضم فريقًا من الخبراء المتخصصين في مجالات مختلفة. يمتلكون خبرة واسعة ويمكنهم توجيهك وتقديم النصائح المهمة.</p>
+                                <p>
+                                مجالات متنوعة:
+                                يقدم استشارات في العديد من المجالات الأكاديمية المهمة. سواء كنت بحاجة لمساعدة في اختيار التخصص المناسب، أو تطوير مهارات الدراسة والبحث، أو التخطيط لمسار مهني في المجال الأكاديمي، فإننا هنا لمساعدتك.</p>
+                                <p>
+                                متابعة دائمة:
+                                يمكنك حجز عدة جلسات لمتابعة استشارتك والاستفادة من المشورة المستمرة. نحن هنا لمساندتك ومساعدتك في جميع مراحل رحلتك الأكاديمية.</p>
+                                <p>
+                                مواعيد مرنة:
+                                نحن ندرك أهمية جدولك الأكاديمي ونحن ملتزمون بتوفير مواعيد مرنة تتناسب مع احتياجاتك وجدولك.</p>
+                           
+                        </div>
+                    </article>
+
+                    
+
+                  
+
+                   
+
+                   
                 </div>
             </div>
-        </div>
-        <div class="row">
-            {% comment %} {% for joob in jobb %}
-            <div class="col-lg-4 col-xl-3 col-md-6">
-                <div class="single_catagory">
-
-                    <img src="{% static 'img/1.png' %}" alt="job" class="img-category">
-
-                    <!-- <a class="heart_mark_index" href="#"> <i class="fa fa-heart"></i> -->
-                    <a>
-                        <h4>{{joob.name}}</h4>
-                    </a>
-                    <p> <span>{{joob.total_jobs}}</span> Available position</p>
-                </div>
-            </div>
-            {% endfor %} {% endcomment %}
-        </div>
-    </div>
-</div>
-<!-- popular_catagory_area_end  -->
-
-
-<!-- job_listing_area_end  -->
-
-<!-- featured_candidates_area_start  -->
-
-
-
-<!-- job_searcing_wrap  -->
-<div class="job_searcing_wrap overlay">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5 offset-lg-1 col-md-6">
-                <div class="searching_text">
-                    <h3>Looking for a Job?</h3>
-                    <p>We provide online instant cash loans with quick approval </p>
-                    <a href="#" class="boxed-btn3">Browse Job</a>
-                </div>
-            </div>
-            <div class="col-lg-5 offset-lg-1 col-md-6">
-                <div class="searching_text">
-                    <h3>Looking for a Expert?</h3>
-                    <p>We provide online instant cash loans with quick approval </p>
-
-                </div>
-            </div>
+           
         </div>
     </div>
-</div>
-<!-- job_searcing_wrap end  -->
-
-<!-- testimonial_area  -->
-
-<!-- /testimonial_area  -->
-
-
-<!-- footer start -->
+</section>
 {% endblock body %}
