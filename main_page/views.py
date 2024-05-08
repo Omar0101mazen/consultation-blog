@@ -17,7 +17,7 @@ def post_list(request):
     myfilter = PostFilter(request.GET,queryset=post_list)
     post_list = myfilter.qs
     
-    paginator = Paginator(post_list, 3)
+    paginator = Paginator(post_list, 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
