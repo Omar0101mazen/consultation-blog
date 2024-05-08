@@ -21,21 +21,21 @@ def post_list(request):
     context = {'posts':page_obj, 'myfilter' : myfilter}
     return render(request,'posts.html',context)
 
-# @login_required
-# def post_detail(request,slug):
-#     post_detail = Post.objects.get(slug=slug)
-#     if request.method == 'POST':
-#         form = post_form(request.POST,request.FILES)
-#         if form.is_valid:
-#             my_form = form.save(commit=False)
-#             my_form.titl = post_detail
-#             my_form.save()
+@login_required
+def post_detail(request,slug):
+    post_detail = Post.objects.get(slug=slug)
+    if request.method == 'POST':
+        form = post_form(request.POST,request.FILES)
+        if form.is_valid:
+            my_form = form.save(commit=False)
+            my_form.titl = post_detail
+            my_form.save()
            
             
             
-#     else :
-#         form = post_form()
+    else :
+        form = post_form()
         
-#     context = {'post':post_detail,'form':form}
-#     return render(request,'post_detail.html',context)
+    context = {'post':post_detail,'form':form}
+    return render(request,'post_detail.html',context)
 

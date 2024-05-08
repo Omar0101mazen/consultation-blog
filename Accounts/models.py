@@ -13,11 +13,11 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to='profile/')
     experiences = models.TextField(blank=True, null=True) 
     certificates = models.TextField(blank=True, null=True)
-    appointment1 = models.DateTimeField(auto_now=False, auto_now_add=False)
-    appointment2 = models.DateTimeField(auto_now=False, auto_now_add=False)
-    appointment3 = models.DateTimeField(auto_now=False, auto_now_add=False)
-    appointment4 = models.DateTimeField(auto_now=False, auto_now_add=False)
-    appointment5 = models.DateTimeField(auto_now=False, auto_now_add=False)
+    appointment1 = models.DateTimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
+    appointment2 = models.DateTimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
+    appointment3 = models.DateTimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
+    appointment4 = models.DateTimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
+    appointment5 = models.DateTimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
     
     
     def __str__(self):
