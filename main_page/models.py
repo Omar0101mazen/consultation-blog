@@ -58,3 +58,19 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text[:20] 
+    
+    
+class CommentRating(models.Model):
+    RATING_CHOICES = (
+        (1, 'Very Poor'),
+        (2, 'Poor'),
+        (3, 'Average'),
+        (4, 'Good'),
+        (5, 'Excellent'),
+    )
+    comment = models.ForeignKey(Comment, related_name='ratings', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
+
+    def __str__(self):
+        return f"{self.user.username} rated {self.rating}/5"

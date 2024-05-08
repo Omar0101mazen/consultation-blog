@@ -54,19 +54,20 @@
                         </div>
                     </div>
                     <div class="apply_job_form white-bg">
+                        <h2>التعليقات:</h2>
+                        {% for comment in post.comments.all %}
+                            <p>{{ comment.author }}: {{ comment.text }}</p>
+                        {% endfor %}
                         <h4>Apply for the job</h4>
                         {% if user.is_authenticated and user.profile.account_type == 'advisor' %}
                         <form method="post">
                             {% csrf_token %}
-                            {{ comment_form.as_p }}
-                            <button type="submit">Add Comment</button>
+                            {% bootstrap_form comment_form %}
+                            <button type="submit">أضف تعليق</button>
                         </form>
                         {% endif %}
                         
-                        <h2>Comments:</h2>
-                        {% for comment in post.comments.all %}
-                            <p>{{ comment.author }}: {{ comment.text }}</p>
-                        {% endfor %}
+                        
                     </div>
                 </div>
                 <div class="col-lg-4">

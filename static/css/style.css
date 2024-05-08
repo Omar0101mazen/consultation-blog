@@ -4107,6 +4107,7 @@ justify-content: center;
 
 /* line 152, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_details.scss */
 .job_details_area .apply_job_form {
+  text-align: right;
   margin-top: 30px;
   padding: 40px;
 }
@@ -4214,6 +4215,11 @@ justify-content: center;
   height: 100%;
 }
 
+.job_sumary {
+  text-align: center;
+  padding: 20px;
+}
+
 /* line 233, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_details.scss */
 .job_details_area .job_sumary {
   background: #fff;
@@ -4235,7 +4241,6 @@ justify-content: center;
 
 /* line 241, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_details.scss */
 .job_details_area .job_sumary .summery_header {
-  border-bottom: 1px solid #EAEAEA;
   padding: 40px;
 }
 
@@ -7545,4 +7550,18 @@ h6 {
 .profile-card .products-details h5 {
   font-size: 1.8rem;
   color: var(--main-color);
+}
+
+.card-body {
+  text-align: right;
+}
+
+img[alt="Client Image"] {
+  border-radius: 999%;
+  max-width: 49%;
+}
+
+.card-title {
+  margin-bottom: 0.75rem;
+  font-size: 28px;
 }

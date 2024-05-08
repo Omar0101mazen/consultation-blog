@@ -22,15 +22,12 @@
                 <!-- Cards Displaying Post Titles and Excerpts (Left Side) -->
                 <div class="col-lg-8">
                     <div class="post_cards">
-                        {% for post in posts %}
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">{{ post.title }}</h5>
-                                <p class="card-text">{{ post.content|truncatewords:20 }}</p>
-                                <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More</a>
+                                <h5 class="card-title"> sss </h5>
+                                <p class="card-text">sdjfshdjkfhsdkfhs </p>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
                 </div>
 
@@ -38,9 +35,9 @@
                 <div class="col-lg-4">
                     <!-- Job Summary with Client Image and Button -->
                     <div class="job_sumary">
-                        <img src="{{ job.client_image_url }}" alt="Client Image" style="width:100%; height:auto;">
+                        <img src="{% static 'img/user.png' %}" alt="Client Image" style="width:100%; height:auto;">
                         <div class="summery_header" style="margin-top: 20px;">
-                            <button class="boxed-btn3 w-100" onclick="location.href='URL_TO_OTHER_PAGE';">View More</button>
+                            <button class="boxed-btn3 w-100" onclick="location.href='URL_TO_OTHER_PAGE';">الملف الشخصي</button>
                         </div>
                     </div>
 
