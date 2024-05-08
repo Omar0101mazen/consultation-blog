@@ -1,3 +1,4 @@
+from django.http import HttpResponseForbidden
 from django.urls import reverse
 from django.shortcuts import render,redirect
 from .models import Post
@@ -37,7 +38,7 @@ def post_detail(request, slug):
             # Check if the user is an advisor before saving
             if request.user.profile.account_type == 'advisor':
                 comment.save()
-                return redirect('post_detail', slug=post.slug)
+                return redirect('mainpage:detail', slug=post.slug)
             else:
                 # Handle cases where the user is not allowed to comment
                 return HttpResponseForbidden("You are not authorized to comment.")
