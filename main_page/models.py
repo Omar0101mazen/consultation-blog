@@ -40,9 +40,11 @@ class Post(models.Model):
     slug = models.SlugField(blank=True,null=True)
     
     
-    def save(self,*args, **kwargs):
-        self.slug = slugify(self.pk)
-        super(Post,self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        super(Post, self).save(*args, **kwargs)  # Save the post first to get a valid pk
+        if not self.slug:  # Check if the slug is empty
+            self.slug = slugify(self.pk)
+            super(Post, self).save(*args, **kwargs) 
         
         
     def __str__(self) :
