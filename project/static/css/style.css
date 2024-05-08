@@ -4107,6 +4107,7 @@ justify-content: center;
 
 /* line 152, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_details.scss */
 .job_details_area .apply_job_form {
+  text-align: right;
   margin-top: 30px;
   padding: 40px;
 }
