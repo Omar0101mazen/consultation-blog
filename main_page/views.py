@@ -14,7 +14,7 @@ def post_list(request):
     myfilter = PostFilter(request.GET,queryset=post_list)
     post_list = myfilter.qs
     
-    paginator = Paginator(post_list, 2)
+    paginator = Paginator(post_list, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
@@ -39,3 +39,7 @@ def post_detail(request,slug):
     context = {'post':post_detail,'form':form}
     return render(request,'post_detail.html',context)
 
+
+
+def about(request):
+    return render(request,'about.html')
