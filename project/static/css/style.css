@@ -4214,6 +4214,11 @@ justify-content: center;
   height: 100%;
 }
 
+.job_sumary {
+  text-align: center;
+  padding: 20px;
+}
+
 /* line 233, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_details.scss */
 .job_details_area .job_sumary {
   background: #fff;
@@ -4235,7 +4240,6 @@ justify-content: center;
 
 /* line 241, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_details.scss */
 .job_details_area .job_sumary .summery_header {
-  border-bottom: 1px solid #EAEAEA;
   padding: 40px;
 }
 
