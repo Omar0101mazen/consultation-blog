@@ -3334,9 +3334,9 @@ justify-content: center;
 
 /* line 48, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_list.scss */
 .job_listing_area .job_lists .single_jobs .jobs_left .jobs_conetent h4 {
-  font-size: 24px;
+  font-size: 30px;
   margin-bottom: 10px;
-  font-weight: 400;
+  font-weight: 700;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
   -o-transition: 0.3s;
@@ -3364,7 +3364,7 @@ justify-content: center;
 
 /* line 64, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_list.scss */
 .job_listing_area .job_lists .single_jobs .jobs_left .jobs_conetent .links_locat .location {
-  margin-right: 50px;
+  margin-right: 12px;
 }
 
 @media (max-width: 767px) {
@@ -3377,13 +3377,13 @@ justify-content: center;
 /* line 69, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_list.scss */
 .job_listing_area .job_lists .single_jobs .jobs_left .jobs_conetent .links_locat .location p {
   margin-bottom: 0;
-  font-size: 16px;
-  color: #AAB1B7;
+  font-size: 20px;
+  color: #2b2c2c;
 }
 
 /* line 73, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_list.scss */
 .job_listing_area .job_lists .single_jobs .jobs_left .jobs_conetent .links_locat .location p i {
-  margin-right: 7px;
+  margin-left: 7px;
 }
 
 @media (max-width: 767px) {
@@ -3888,6 +3888,7 @@ justify-content: center;
 
 /* line 1, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_details.scss */
 .job_details_area {
+  direction: rtl;
   background: #F5F7FA;
   padding-top: 100px;
   padding-bottom: 100px;
@@ -3896,7 +3897,6 @@ justify-content: center;
 /* line 5, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_details.scss */
 .job_details_area .single_jobs {
   padding: 30px;
-  border-bottom: 1px solid #EAEAEA;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
   -o-transition: 0.3s;
@@ -3942,6 +3942,7 @@ justify-content: center;
 
 /* line 34, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_details.scss */
 .job_details_area .single_jobs .jobs_left .jobs_conetent h4 {
+  margin-right: 50px;
   font-size: 24px;
   margin-bottom: 10px;
   font-weight: 400;
@@ -4051,6 +4052,7 @@ justify-content: center;
 
 /* line 110, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_details.scss */
 .job_details_area .descript_wrap {
+  text-align: right;
   padding: 40px;
 }
 
@@ -7564,4 +7566,35 @@ img[alt="Client Image"] {
 .card-title {
   margin-bottom: 0.75rem;
   font-size: 28px;
+}
+
+.single_jobs.white-bg.d-flex.justify-content-between {
+  justify-content: right !important;
+}
+
+.jobs_left.d-flex.align-items-center {
+  direction: rtl;
+}
+
+.job_listing_area .job_lists .single_jobs .jobs_left .jobs_conetent h4 {
+  text-align: right;
+  margin-right: 12px;
+}
+
+.card.shadow-sm.p-4.mb-4 {
+  text-align: right;
+}
+
+.jobs_content {
+  margin-right: 12px;
+}
+
+div.jobs_content > h4 {
+  font-weight: 700;
+  font-size: 30px;
+}
+
+div.jobs_content > p {
+  font-size: 18px;
+  color: #2b2c2c;
 }
