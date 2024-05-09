@@ -1,7 +1,7 @@
 from django.http import HttpResponseForbidden
 from django.urls import reverse
 from django.shortcuts import render,redirect
-from .models import Post
+from .models import Post,Comment,CommentRating
 from django.core.paginator import Paginator
 from .forms import post_form
 from django.contrib.auth.decorators import login_required
@@ -52,3 +52,17 @@ def post_detail(request, slug):
 
 def about(request):
     return render(request,'about.html')
+
+
+def rate_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.method == 'POST' and request.user.profile.account_type == 'advisor':
+        rating = request.POST.get('rating')
+        CommentRating.objects.update_or_create(
+            user=request.user,
+            comment=comment,
+            defaults={'rating': rating}
+        )
+        return redirect('mainpage:detail', slug=comment.post.slug)
+    else:
+        return HttpResponseForbidden("You are not authorized to rate comments.")

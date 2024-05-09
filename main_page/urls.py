@@ -7,6 +7,7 @@ urlpatterns = [
 
     path('',views.post_list, name='list'),
     path('<int:slug>',views.post_detail, name='detail'),
-    path('about/',views.about,name='about')
+    path('about/',views.about,name='about'),
+    path('rate_comment/<int:comment_id>/', rate_comment, name='rate_comment'),
 
 ]
