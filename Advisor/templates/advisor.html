@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block body %}
+    <!-- bradcam_area  -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>{{job.title}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+
+    <div class="job_details_area">
+        <div class="container">
+            <div class="row">
+                <!-- Cards Displaying Post Titles and Excerpts (Left Side) -->
+                <div class="col-lg-8">
+                    <div class="post_cards">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> sss </h5>
+                                <p class="card-text">sdjfshdjkfhsdkfhs </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Summary and Add Post Form (Right Side) -->
+                <div class="col-lg-4">
+                    <!-- Job Summary with Client Image and Button -->
+                    <div class="job_sumary">
+                        <img src="{% static 'img/user.png' %}" alt="Client Image" style="width:100%; height:auto;">
+                        <div class="summery_header" style="margin-top: 20px;">
+                            <button class="boxed-btn3 w-100" onclick="location.href='URL_TO_OTHER_PAGE';">الملف الشخصي</button>
+                        </div>
+                    </div>
+
+                    <!-- Add Post Form -->
+                    <div class="apply_job_form white-bg" style="margin-top: 20px;">
+                        <h4>أضف منشوراً جديداً</h4>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            {% buttons %}
+                              <button class="boxed-btn3 w-100" type="submit">نّشر</button>
+                            {% endbuttons %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer start -->
+  
+{% endblock body %}
