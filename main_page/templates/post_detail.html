@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% load static %}
 {% load bootstrap4 %}
@@ -9,7 +8,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
-                        <h3>{{job.title}}</h3>
+                        <h3>Example Job Title</h3>
                     </div>
                 </div>
             </div>
@@ -20,73 +19,36 @@
     <div class="job_details_area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     
-                    <div class="job_details_header">
-                        <div class="single_jobs white-bg d-flex justify-content-between">
-                            <div class="jobs_left d-flex align-items-center">
-                                <div class="thumb">
-                                    {% if job.img %}
-                                        <img src="{{job.img.url}}" alt="Job" width="82" height="82">
-                                    {% else %} 
-                                        <img src="{% static 'img/job.png' %}" alt="" width="82" height="82">    
-                                    {% endif %}
-                                </div>
-                                <div class="jobs_conetent">
-                                    <a href="#"><h4>{{job.title}}</h4></a>
-                                    <div class="links_locat d-flex align-items-center">
-                                        <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i>{{job.Country}}</p>
-                                        </div>
-                                        <div class="location">
-                                            <p> <i class="fa fa-clock-o"></i>{{job.job_type}}</p>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="card shadow-sm p-4 mb-4">
+                        <!-- Combined image, title and description in a single card layout -->
+                        <div class="d-flex justify-content-start align-items-start">
+                            <div class="thumb mr-4">
+                                <img src="{% static 'img/job.png' %}" alt="" width="100">
                             </div>
-                        
+                            <div class="jobs_content">
+                                <h4>مهندس برمجيات</h4>
+                                <p class="mb-0">شرح مفصل لكيفية وطرق العمل باختصار شديد لوريم ايبسوم مهندس برمجيات معلوماتية عمر مكحل.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="descript_wrap white-bg">
-                        <div class="single_wrap">
-                            <h4>Job description</h4>
-                            <p>{{job.description}}</p>
+
+                    <div class="apply_job_form card shadow-sm p-4">
+                        <h2 class="mb-3">التعليقات</h2>
+                        <div class="comment mb-2">
+                            <strong>عبادة عبدالله:</strong> نخابر .. نخابر فيما بعد!
                         </div>
-                    </div>
-                    <div class="apply_job_form white-bg">
-                        <h2>التعليقات:</h2>
-                        {% for comment in post.comments.all %}
-                            <p>{{ comment.author }}: {{ comment.text }}</p>
-                        {% endfor %}
-                        <h4>Apply for the job</h4>
-                        {% if user.is_authenticated and user.profile.account_type == 'advisor' %}
-                        <form method="post">
+                        <div class="comment mb-4">
+                            <strong> عمر مكحل:</strong> مهتم التفاصيل.
+                        </div>
+                        <h4 class="mb-3">التقديم على العمل</h4>
+                        <form method="post" class="form-inline">
                             {% csrf_token %}
-                            {% bootstrap_form comment_form %}
-                            <button type="submit">أضف تعليق</button>
+                            <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Your comment" name="comment">
+                            <button type="submit" class="btn btn-primary mb-2">إضافة التعليق</button>
                         </form>
-                        {% endif %}
-                        
-                        
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="job_sumary">
-                        <div class="summery_header">
-                            <h3>Job Summery</h3>
-                        </div>
-                        <div class="job_content">
-                            <ul>
-                                <li>Published on: <span>{{job.published_at|date:'d M o'}}</span></li>
-                                <li>Vacancy: <span>{{job.Vacancy}} Position</span></li>
-                                <li>Salary: <span>{{job.salary}} $</span></li>
-                                <li>Location: <span>{{job.Country}}</span></li>
-                                <li>Job Nature: <span> {{job.job_type}}</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                   
-                   
                 </div>
             </div>
         </div>

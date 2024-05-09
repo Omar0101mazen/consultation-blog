@@ -3364,7 +3364,7 @@ justify-content: center;
 
 /* line 64, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_list.scss */
 .job_listing_area .job_lists .single_jobs .jobs_left .jobs_conetent .links_locat .location {
-  margin-right: 50px;
+  margin-right: 12px;
 }
 
 @media (max-width: 767px) {
@@ -7564,4 +7564,17 @@ img[alt="Client Image"] {
 .card-title {
   margin-bottom: 0.75rem;
   font-size: 28px;
+}
+
+.single_jobs.white-bg.d-flex.justify-content-between {
+  justify-content: right !important;
+}
+
+.jobs_left.d-flex.align-items-center {
+  direction: rtl;
+}
+
+.job_listing_area .job_lists .single_jobs .jobs_left .jobs_conetent h4 {
+  text-align: right;
+  margin-right: 12px;
 }
