@@ -55,6 +55,13 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
+    def ratings_average(self):
+        ratings = self.ratings.all()
+        if ratings:
+            average = sum(r.rating for r in ratings) / ratings.count()
+            return round(average, 1)
+        return 0
+
 
     def __str__(self):
         return self.text[:20] 
@@ -74,3 +81,5 @@ class CommentRating(models.Model):
 
     def __str__(self):
         return f"{self.user.username} rated {self.rating}/5"
+    
+    

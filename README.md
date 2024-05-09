@@ -1,1 +1,1 @@
-# consultation-blogs
+# consultation-blog

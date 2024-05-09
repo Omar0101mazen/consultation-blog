@@ -35,19 +35,24 @@
                     </div>
 
                     <div class="apply_job_form card shadow-sm p-4">
-                        <h2 class="mb-3">التعليقات</h2>
-                        <div class="comment mb-2">
-                            <strong>عبادة عبدالله:</strong> نخابر .. نخابر فيما بعد!
-                        </div>
-                        <div class="comment mb-4">
-                            <strong> عمر مكحل:</strong> مهتم التفاصيل.
-                        </div>
-                        <h4 class="mb-3">التقديم على العمل</h4>
-                        <form method="post" class="form-inline">
-                            {% csrf_token %}
-                            <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Your comment" name="comment">
-                            <button type="submit" class="btn btn-primary mb-2">إضافة التعليق</button>
-                        </form>
+                        <h2>التعليقات:</h2>
+                        {% for comment in post.comments.all %}
+                            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ comment.author }}</h5>
+                                    <small>{{ comment.created_date }}</small>
+                                </div>
+                                <p class="mb-1">{{ comment.text }}</p>
+                                <div>Rated: {{ comment.ratings_average }} out of 5</div> <!-- تأكد من استدعاء الدالة هنا -->
+                                {% if user.is_authenticated and user.profile.account_type == 'advisor' %}
+                                <form method="post" action="{% url 'mainpage:rate_comment' comment.id %}">
+                                    {% csrf_token %}
+                                    <input id="rating-input-{{ comment.id }}" name="rating" type="text" class="rating" data-size="xs">
+                                    <button type="submit" class="btn btn-primary mt-2">Rate</button>
+                                </form>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -57,4 +62,3 @@
     <!-- footer start -->
   
 {% endblock body %}
-

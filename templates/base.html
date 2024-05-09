@@ -26,9 +26,22 @@
     <link rel="stylesheet" href="{% static 'css/gijgo.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-star-rating/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- <link rel="stylesheet" href="{% static 'css/responsive.css' %}"> -->
+    <style>
+        .rating-stars ul {
+            list-style-type: none;
+            padding: 0;
+            display: inline-flex;
+        }
+        .rating-stars ul li {
+            padding: 5px;
+            color: #ffd700; /* لون ذهبي */
+        }
+    </style>
     
         
 </head>
@@ -136,8 +149,9 @@
     <script src="{%static 'js/jquery.form.js' %}"></script>
     <script src="{%static 'js/jquery.validate.min.js' %}"></script>
     <script src="{%static 'js/mail-script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-star-rating/js/star-rating.min.js"></script>
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{%static 'js/main.js' %}"></script>
 
 
@@ -155,6 +169,24 @@
             $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
                 " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
         } );
+        
+        $(document).ready(function() {
+            $('.rating-stars ul').each(function() {
+                var $starsList = $(this);
+                var ratingsAverage = parseFloat($starsList.attr('data-rating-average')); // تأكد من وضع هذه البيانات في HTML
+                var starTotal = 5;
+        
+                $starsList.empty(); // تفريغ القائمة قبل إعادة ملء النجوم
+        
+                for (let i = 1; i <= starTotal; i++) {
+                    // استخدام الفئات الصحيحة لنجوم FontAwesome
+                    var starClass = i <= ratingsAverage ? 'fa fa-star' : 'fa fa-star-o';
+                    $starsList.append($('<li class="star"><i class="' + starClass + '" aria-hidden="true"></i></li>'));
+                }
+            });
+        });
+           
+            
         </script>
         
         
