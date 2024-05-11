@@ -51,3 +51,4 @@ class Message(models.Model):
 
     def str(self):
         return f"Message from {self.sender.username} on {self.timestamp.strftime('%Y-%m-%d %H:%M')}"
+    
