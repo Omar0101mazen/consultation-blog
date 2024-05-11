@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block body %}
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>{{ job.title }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top: 100px;" >
+    <h2 class="mb-4">المستشارين:</h2>
+    <div class="row">
+        {% for advisor in advisors %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                
+                <img src="{% if advisor.profile.photo %}{{ advisor.profile.photo.url }}{% else %}{% static 'img/user.png' %}{% endif %}" class="card-img-top" alt="{{ advisor.username }}">
+
+                    
+                <div class="card-body">
+                    <h5 class="card-title">{{ advisor.username }}</h5>
+                    <p class="card-text"> الخبرات: {{ advisor.profile.experiences|default:"No experiences provided." }}</p>
+                    <p class="card-text">الشهادات: {{ advisor.profile.certificates|default:"No certificates provided." }}</p>
+                </div>
+                <div class="card-footer">
+                    
+                    <a href="{% url 'Advisor:book_appointment' advisor.id %}" class="btn btn-primary">احجز موعد</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

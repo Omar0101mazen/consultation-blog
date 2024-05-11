@@ -1,7 +1,13 @@
 import django_filters
 from .models import Post
+from django import forms
 class PostFilter(django_filters.FilterSet):
-    description = django_filters.CharFilter(lookup_expr='icontains')
+    title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        label='',
+        widget=forms.TextInput(attrs={'placeholder':  'عنوان المنشور'})
+    )
+
     class Meta:
         model = Post
         fields = ['title']

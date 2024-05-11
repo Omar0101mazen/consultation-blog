@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
-                        <h3>Example Job Title</h3>
+                        <h3></h3>
                     </div>
                 </div>
             </div>
@@ -21,21 +21,29 @@
             <div class="row">
                 <div class="col-lg-12">
                     
+                        
+                        
                     <div class="card shadow-sm p-4 mb-4">
                         <!-- Combined image, title and description in a single card layout -->
                         <div class="d-flex justify-content-start align-items-start">
                             <div class="thumb mr-4">
-                                <img src="{% static 'img/job.png' %}" alt="" width="100">
+                                {% if post.author.profile.photo %}
+                                    <img src="{{post.author.profile.photo.url}}" alt="Job" width="82" height="82">
+                                {% else %} 
+                                    <img src="{% static 'img/user.png' %}" alt="Job" width="82" height="82">    
+                                {% endif %}
+
                             </div>
                             <div class="jobs_content">
-                                <h4>مهندس برمجيات</h4>
-                                <p class="mb-0">شرح مفصل لكيفية وطرق العمل باختصار شديد لوريم ايبسوم مهندس برمجيات معلوماتية عمر مكحل.</p>
+                                <h4>{{post.content}}</h4>
+                                <p class="mb-0">{{post.title}}</p>
                             </div>
                         </div>
                     </div>
 
+
                     <div class="apply_job_form card shadow-sm p-4">
-                        <h2>التعليقات:</h2>
+                        <h2> التعليقات :</h2>
                         {% for comment in post.comments.all %}
                             <div class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
@@ -43,16 +51,30 @@
                                     <small>{{ comment.created_date }}</small>
                                 </div>
                                 <p class="mb-1">{{ comment.text }}</p>
-                                <div>Rated: {{ comment.ratings_average }} out of 5</div> <!-- تأكد من استدعاء الدالة هنا -->
+                                <div>معدل التقييمات: {{ comment.ratings_average }} من 5</div> <!-- تأكد من استدعاء الدالة هنا -->
                                 {% if user.is_authenticated and user.profile.account_type == 'advisor' %}
                                 <form method="post" action="{% url 'mainpage:rate_comment' comment.id %}">
                                     {% csrf_token %}
                                     <input id="rating-input-{{ comment.id }}" name="rating" type="text" class="rating" data-size="xs">
-                                    <button type="submit" class="btn btn-primary mt-2">Rate</button>
+                                    <button type="submit" class="boxed-btn3">أضف تققيم</button>
                                 </form>
                                 {% endif %}
                             </div>
+                                
                         {% endfor %}
+                       
+                    </div>
+                    <div class="apply_job_form white-bg">
+                    <h4>أضف تعليقاً</h4>
+                    {% if user.is_authenticated and user.profile.account_type == 'advisor' %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        
+                        <button class="boxed-btn3" type="submit">علّق</button>
+                      
+                    </form>
+                    {% endif %}
                     </div>
                 </div>
             </div>

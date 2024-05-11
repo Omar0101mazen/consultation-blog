@@ -1,62 +1,105 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "base.html" %} 
 {% load bootstrap4 %}
-{% block body %}
-    <!-- bradcam_area  -->
-    <div class="bradcam_area bradcam_bg_1">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text">
-                        <h3>{{job.title}}</h3>
-                    </div>
-                </div>
-            </div>
+ {% load static %} 
+{% load i18n%}
+ {% block body %}
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="bradcam_text">
+          <h3>{{ job.title }}</h3>
         </div>
+      </div>
     </div>
-    <!--/ bradcam_area  -->
+  </div>
+</div>
+<!--/ bradcam_area  -->
 
-    <div class="job_details_area">
-        <div class="container">
-            <div class="row">
-                <!-- Cards Displaying Post Titles and Excerpts (Left Side) -->
-                <div class="col-lg-8">
-                    <div class="post_cards">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title"> sss </h5>
-                                <p class="card-text">sdjfshdjkfhsdkfhs </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Job Summary and Add Post Form (Right Side) -->
-                <div class="col-lg-4">
-                    <!-- Job Summary with Client Image and Button -->
-                    <div class="job_sumary">
-                        <img src="{% static 'img/user.png' %}" alt="Client Image" style="width:100%; height:auto;">
-                        <div class="summery_header" style="margin-top: 20px;">
-                            <button class="boxed-btn3 w-100" onclick="location.href='URL_TO_OTHER_PAGE';">الملف الشخصي</button>
-                        </div>
-                    </div>
-
-                    <!-- Add Post Form -->
-                    <div class="apply_job_form white-bg" style="margin-top: 20px;">
-                        <h4>أضف منشوراً جديداً</h4>
-                        <form method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {% bootstrap_form form %}
-                            {% buttons %}
-                              <button class="boxed-btn3 w-100" type="submit">نّشر</button>
-                            {% endbuttons %}
-                        </form>
-                    </div>
-                </div>
-            </div>
+<div class="job_details_area">
+  <div class="container">
+    <div class="row">
+      <!-- Job Summary and Add Post Form (Right Side) -->
+      <div class="col-lg-4">
+        <!-- Job Summary with Client Image and Button -->
+        <div class="job_sumary">
+          {% if profile.photo %}
+          <img
+            src="{{ profile.photo.url }}"
+            alt="Client Image"
+            style="width: 100%; height: auto"
+          />
+          {% else %}
+          <img
+            src="{% static 'img/user.png' %}"
+            alt="Client Image"
+            style="width: 100%; height: auto"
+          />
+          {%endif%}
+          <div class="summery_header" style="margin-top: 20px">
+            <h1
+              class=" w-100"
+              
+            >
+              {{profile.user}}
+            </h1>
+          </div>
         </div>
-    </div>
 
-    <!-- footer start -->
-  
+        <!-- Add Post Form -->
+        <div class="apply_job_form white-bg" style="margin-top: 20px">
+          <h4>أضف منشوراً جديداً</h4>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %} {% bootstrap_form form %} {% buttons %}
+            <button class="boxed-btn3 w-100" type="submit">نّشر</button>
+            {% endbuttons %}
+          </form>
+        </div>
+      </div>
+
+      <!-- Cards Displaying Post Titles and Excerpts (Left Side) -->
+      <div class="col-lg-8">
+        <div class="post_cards">
+          {% for post in user_posts %}
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{post.title}} </h5>
+              <p class="card-text">{{post.content}}</p>
+            </div>
+          </div>
+          {% endfor %}
+          
+          <!-- Displaying Appointments for All Users -->
+          <h4 class="mt-4">مواعيدك:</h4>
+          {% if user_appointments %}
+          <div class="row">
+            {% for appointment in user_appointments %}
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card">
+                <div class="card-header">الموعد:</div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ appointment.advisor.username }}</h5>
+                  <p class="card-text">
+                    اليوم: {{ appointment.session_date|date:"D, d M Y" }}<br />
+                    الوقت: {{ appointment.session_time|time:"H:i" }}<br />
+                    المعلومات: {{ appointment.session_reason|default:"No additional details provided." }}
+                  </p>
+                  <a href="{% url 'advisor:user_chat_page' appointment.id %}" class="btn btn-primary">إذهب للدردشة</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <p class="mt-3">لا يوجد مواعيد</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer start -->
+
+</div>
 {% endblock body %}

@@ -9,25 +9,34 @@ from .filters import PostFilter
 from django.db.models import Count
 from .forms import CommentForm
 from django.shortcuts import get_object_or_404, redirect
+from django.db.models import Avg
+
 # Create your views here.
 
 
+from django.db.models import Count
+def highest_rated_comment():
+    highest_rated_comment = Comment.objects.annotate(avg_rating=Avg('ratings__rating')).order_by('-avg_rating')[:3]
+    return highest_rated_comment
 def post_list(request):
-    post_list = Post.objects.all()
-    myfilter = PostFilter(request.GET,queryset=post_list)
+    top_comments = highest_rated_comment()
+    post_list = Post.objects.annotate(comment_count=Count('comments'))
+    myfilter = PostFilter(request.GET, queryset=post_list)
     post_list = myfilter.qs
     
-    paginator = Paginator(post_list, 2)
+    paginator = Paginator(post_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
-    context = {'posts':page_obj, 'myfilter' : myfilter}
-    return render(request,'posts.html',context)
+    context = {'posts': page_obj, 'top_comments': top_comments, 'myfilter': myfilter}
+    return render(request, 'posts.html', context)
+
 
 
 
 @login_required
 def post_detail(request, slug):
+
     post = get_object_or_404(Post, slug=slug)
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -66,3 +75,8 @@ def rate_comment(request, comment_id):
         return redirect('mainpage:detail', slug=comment.post.slug)
     else:
         return HttpResponseForbidden("You are not authorized to rate comments.")
+    
+
+
+
+

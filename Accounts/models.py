@@ -10,18 +10,13 @@ class Profile(models.Model):
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     account_type = models.CharField(max_length=20, choices=ACCOUNT_TYPES, default='normal')
-    photo = models.ImageField(upload_to='profile/')
+    photo = models.ImageField(upload_to='profiles/', default='profiles/user.png')
     experiences = models.TextField(blank=True, null=True) 
     certificates = models.TextField(blank=True, null=True)
-    appointment1 = models.DateTimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
-    appointment2 = models.DateTimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
-    appointment3 = models.DateTimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
-    appointment4 = models.DateTimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
-    appointment5 = models.DateTimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
     
-    
-    def __str__(self):
-        return self.user
+    def str(self):
+        return f"{self.user.username} - {'Advisor' if self.account_type == 'advisor' else 'User'}"
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
-                        <h3>{{posts|length}} + Post Available</h3>
+                        <h3>{{posts|length}} + عدد المنشورات</h3>
                     </div>
                 </div>
             </div>
@@ -25,11 +25,11 @@
                 <div class="col-lg-3">
                     <div class="job_filter white-bg">
                         <div class="form_inner white-bg">
-                            <h3>Filter</h3>
+                            <h3>البحث</h3>
                             <form method="GET">
                                 {% bootstrap_form myfilter.form %}
                                 
-                                <input type="submit" value="serch" class="boxed-btn3 w-100 mt-3"  >
+                                <input type="submit" value="بحث"  class="boxed-btn3 w-100 mt-3"  >
                             </form>
                         </div>
 
@@ -40,6 +40,30 @@
 
                     <div class="job_lists m-0">
                         <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                    <div class="single_jobs white-bg d-flex justify-content-between" style="border-radius: 53px; border: 5px #01293e solid;">
+                                        {% for comment in top_comments %}
+
+                                        <div class="jobs_left d-flex align-items-center">
+                                            <div class="jobs_conetent">
+                                                <a href="{% url 'mainpage:detail' comment.post.slug %}"><h4>أعلى النصائح تقييماً:</h4></a>
+                                                <div class="links_locat d-flex align-items-center">
+                                                    <div class="location">
+                                                        <p>متوسط التقييم: {{ comment.avg_rating }} من 5</p>
+                                                        <p>التعليق: {{ comment.text }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jobs_right">
+                                            <div class="apply_now">
+                                                <a href="{% url 'mainpage:detail' comment.post.slug %}" class="boxed-btn3">أنتقل للنصيحة</a>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                                            </div>
                             {% for post in posts %}
                               
                             
@@ -47,10 +71,10 @@
                                 <div class="single_jobs white-bg d-flex justify-content-between">
                                     <div class="jobs_left d-flex align-items-center">
                                         <div class="thumb">
-                                            {% if post.photo %}
-                                                <img src="{{post.pjoto.url}}" alt="Job" width="82" height="82">
+                                            {% if post.author.profile.photo %}
+                                                <img src="{{post.author.profile.photo.url}}" alt="Job" width="82" height="82">
                                             {% else %} 
-                                                <img src="{% static 'img/job.png' %}" alt="Job" width="82" height="82">    
+                                                <img src="{% static 'img/user.png' %}" alt="Job" width="82" height="82">    
                                             {% endif %}
                                                
                                         </div>
@@ -59,7 +83,7 @@
                                             <div class="links_locat d-flex align-items-center">
                                                 <div class="location">
                                                     <p>{{post.content}}</p>
-                                                    
+                                                    <p>عدد التعليقات: {{ post.comment_count }}</p>
                                                 </div>
                                                 {% comment %} <div class="location">
                                                     <p> <i class="fa fa-clock-o"></i>{{job.job_type}}</p>
@@ -70,12 +94,8 @@
                                     </div>
                                     <div class="jobs_right">
                                         <div class="apply_now">
-                                            <!-- <a class="heart_mark" href="#"> <i class="fa fa-heart"></i> </a> -->
-                                            {% comment %} <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">Apply Now</a> {% endcomment %}
                                         </div>
-                                        {% comment %} <div class="date">
-                                            <p>Date line: {{post.published_at|date:'d M o'}}</p>
-                                        </div> {% endcomment %}
+                                        
                                     </div>
                                 </div>
                             </div>

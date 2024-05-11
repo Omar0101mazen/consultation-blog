@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+{% load i18n %}
+
+{% block body %}
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>{{ job.title }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+
+<div class="job_details_area">
+    <div class="container">
+        <div class="row">
+            <!-- Cards Displaying Post Titles and Excerpts (Left Side) -->
+           <!-- Cards Displaying Post Titles and Excerpts (Left Side) -->
+
+           <div class="col-lg-8">
+                <div class="post_cards">
+                    {% for post in user_posts %}
+                    <div class="card">
+                        <div class="card-body">
+                        <h5 class="card-title">{{post.title}} </h5>
+                        <p class="card-text">{{post.content}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- Conditional Section for Advisor Appointments -->
+                    {% if request.user.profile.account_type == "advisor" %}
+                    <h4 class="mt-4">مواعيدك</h4>
+                    {% if appointments %}
+                    <div class="row">
+                        {% for appointment in appointments %}
+                        {{ appointment }}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-header">
+                                   تاريخ الموعد
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ appointment.client.username }}</h5>
+                                    <p class="card-text">
+                                        Date: {{ appointment.date|date:"D, d M Y H:i" }}<br>
+                                        Details: {{ appointment.details|default:"No additional details provided." }}
+                                    </p>
+                                    <a href="{% url 'advisor:chat_page' appointment.id %}" class="btn btn-primary">انتقل للدردشة</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p class="mt-3">لا يوجد مواعيد</p>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Job Summary and Add Post Form (Right Side) -->
+            <div class="col-lg-4">
+                <!-- Job Summary with Client Image and Button -->
+                <div class="job_sumary">
+                    {% if profile.photo %}
+                    <img
+                        src="{{ profile.photo.url }}"
+                        alt="Client Image"
+                        style="width: 100%; height: auto"
+                    />
+                    {% else %}
+                    <img
+                        src="{% static 'img/user.png' %}"
+                        alt="Client Image"
+                        style="width: 100%; height: auto"
+                    />
+                    {%endif%}
+                    <div class="summery_header" style="margin-top: 20px;">
+                        <h1 class="w-100" >{{profile.user}}</h1>
+                        
+                    </div>
+                    <a href = "{% url 'advisor:manage_available_times' %}" class="boxed-btn3"> أضف أوقات فراغك</a>
+
+                </div>
+
+                <!-- Add Post Form -->
+                <div class="apply_job_form white-bg" style="margin-top: 20px;">
+                    <h4>أضف منشوراً جديداً</h4>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                        <button class="boxed-btn3 w-100" type="submit">نّشر</button>
+                        {% endbuttons %}
+                    </form>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+{% for appointment_data in appointments_with_messages %}
+<div class="card mb-4">
+    <div class="card-header">
+        الموعد  {{ appointment_data.appointment.date }} في {{ appointment_data.appointment.time }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">الرسائل</h5>
+        {% if appointment_data.messages %}
+        <ul class="list-group list-group-flush">
+            {% for message in appointment_data.messages %}
+            <li class="list-group-item">
+                <strong>{{ message.sender.username }}</strong> at <small>{{ message.timestamp }}</small>:
+                {{ message.text }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>لا يوجد رسائل.</p>
+        {% endif %}
+        <!-- Form to send new message -->
+        <form method="post" action="{% url 'advisor:send_message' appointment_data.appointment.id %}" class="mt-3">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ message_form.text.label_tag }}
+                {{ message_form.text }}
+            </div>
+            <button type="submit" class="btn btn-primary">إرسال</button>
+        </form>
+    </div>
+</div>
+{% endfor %}
+<!-- footer start -->
+
+{% endblock body %}

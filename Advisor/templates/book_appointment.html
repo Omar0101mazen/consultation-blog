@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>{{ job.title }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-5" style="padding-bottom: 50px;">
+    <h2>أحجز موعد</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        
+        <!-- Render Session Reason Field -->
+        <div class="mb-3">
+            {{ form.session_reason.label_tag }}
+            {{ form.session_reason }}
+            {% if form.session_reason.errors %}
+                <div class="alert alert-danger">{{ form.session_reason.errors.as_text }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Render Session Type Field -->
+        <div class="mb-3">
+            {{ form.session_type.label_tag }}
+            {{ form.session_type }}
+            {% if form.session_type.errors %}
+                <div class="alert alert-danger">{{ form.session_type.errors.as_text }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Render Available Time Selection Field -->
+        <div class="mb-3">
+            {{ form.available_time.label_tag }}
+            {{ form.available_time }}
+            {% if form.available_time.errors %}
+                <div class="alert alert-danger">{{ form.available_time.errors.as_text }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Hidden Advisor Field (if necessary) -->
+        {% if form.advisor %}
+            <div class="mb-3" style="display: none;">
+                {{ form.advisor }}
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary">احجز الموعد</button>
+    </form>
+</div>
+{% endblock %}
